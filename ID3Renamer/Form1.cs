@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using File = System.IO.File;
+using System.Text.RegularExpressions;
 
 namespace ID3Renamer
 {
     public partial class Form1 : Form
     {
+        string errors;
 
         int fileCount;
+        int alreadyExist = 0;
         delegate string SomeDelegate(FileInfo fileInfo, string directory);
 
         public Form1()
@@ -78,21 +81,40 @@ namespace ID3Renamer
 
                 try
                 {
-                    File.Move(fileInfo.FullName, directory + newFileName + ".mp3");
-                    string finished = fileInfo.Name + newFileName;
-                    return finished;
+                    string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+                    Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+
+                    newFileName = r.Replace(newFileName, "");
+
+                    if (File.Exists(directory + newFileName + ".mp3"))
+                    {
+                        alreadyExist++;
+                        return fileInfo.Name;
+                    }
+
+                    else
+                    {
+                        File.Move(fileInfo.FullName, directory + newFileName + ".mp3");
+                        return fileInfo.Name;
+                    }
+                    
                 }
 
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    errors += ex.Message + Environment.NewLine + fileInfo.FullName + Environment.NewLine + Environment.NewLine;
                 }
-
-                return "";
             }
+
+            return "";
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             foreach (string file in listDirectories.Items)
             {
@@ -104,6 +126,12 @@ namespace ID3Renamer
                 string result = sd.EndInvoke(asyncRes);
                 labelStatus.Text = result;
             }
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show(errors + Environment.NewLine + alreadyExist.ToString());
+            labelStatus.Text = "Ready";
         }
     }
 }
