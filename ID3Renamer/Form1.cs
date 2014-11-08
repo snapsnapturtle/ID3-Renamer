@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using File = System.IO.File;
 
 namespace ID3Renamer
 {
@@ -15,6 +16,7 @@ namespace ID3Renamer
     {
 
         int fileCount;
+        delegate string SomeDelegate(FileInfo fileInfo, string directory);
 
         public Form1()
         {
@@ -42,8 +44,8 @@ namespace ID3Renamer
                     fileCount++;
                 }
 
-                if (fileCount == 1) labelStatus.Text = fileCount + " Item Loaded";
-                else labelStatus.Text = fileCount + " Items Loaded";
+                if (fileCount == 1) labelStatus.Text = fileCount + " Item";
+                else labelStatus.Text = fileCount + " Items";
             }
 
             else
@@ -66,6 +68,42 @@ namespace ID3Renamer
         private void Form1_Load(object sender, EventArgs e)
         {
             textBoxParentDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        }
+
+        private string changeMp3(FileInfo fileInfo, string directory)
+        {
+            using (var mp3 = TagLib.File.Create(fileInfo.FullName))
+            {
+                var newFileName = string.Format("{0} {1}", mp3.Tag.Track, mp3.Tag.Title);
+
+                try
+                {
+                    File.Move(fileInfo.FullName, directory + newFileName + ".mp3");
+                    string finished = fileInfo.Name + newFileName;
+                    return finished;
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                return "";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (string file in listDirectories.Items)
+            {
+                FileInfo info = new FileInfo(file);
+                string directory = Path.GetDirectoryName(file) + "\\";
+
+                SomeDelegate sd = changeMp3;
+                IAsyncResult asyncRes = sd.BeginInvoke(info, directory, null, null);
+                string result = sd.EndInvoke(asyncRes);
+                labelStatus.Text = result;
+            }
         }
     }
 }

@@ -34,6 +34,7 @@
             this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBoxParentDirectory = new System.Windows.Forms.TextBox();
             this.buttonBrowseParentDirectory = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,8 +73,8 @@
             // 
             this.labelStatus.ForeColor = System.Drawing.Color.White;
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(64, 17);
-            this.labelStatus.Text = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(39, 17);
+            this.labelStatus.Text = "Ready";
             // 
             // textBoxParentDirectory
             // 
@@ -92,12 +93,23 @@
             this.buttonBrowseParentDirectory.UseVisualStyleBackColor = true;
             this.buttonBrowseParentDirectory.Click += new System.EventHandler(this.buttonBrowseParentDirectory_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(272, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(451, 255);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxParentDirectory);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listDirectories);
@@ -121,6 +133,7 @@
         private System.Windows.Forms.ToolStripStatusLabel labelStatus;
         private System.Windows.Forms.TextBox textBoxParentDirectory;
         private System.Windows.Forms.Button buttonBrowseParentDirectory;
+        private System.Windows.Forms.Button button1;
     }
 }
 
