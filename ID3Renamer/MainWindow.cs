@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using File = System.IO.File;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace ID3Renamer
 {
@@ -73,7 +74,10 @@ namespace ID3Renamer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBoxParentDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            textBoxParentDirectory.Text = directory;
+            textBoxParentDirectory.Text = directory;
+            processDirectory(directory);
         }
 
         private string changeMp3(FileInfo fileInfo, string directory)
@@ -187,7 +191,7 @@ namespace ID3Renamer
             listDirectories.Enabled = true;
             buttonFindFiles.Enabled = true;
             buttonStart.Enabled = true;
-            buttonBrowseParentDirectory.Enabled = false;
+            buttonBrowseParentDirectory.Enabled = true;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
