@@ -84,14 +84,10 @@ namespace ID3Renamer
 
                 try
                 {
-                    MessageBox.Show(newFileName);
-
                     string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
                     Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
 
                     newFileName = r.Replace(newFileName, "");
-
-                    MessageBox.Show(newFileName);
 
                     if (File.Exists(directory + newFileName + ".mp3"))
                     {
@@ -158,7 +154,7 @@ namespace ID3Renamer
             buttonExit.Visible = true;
             labelErrorReporting.Text = "Error Reporting";
             textBoxErrors.Text = changed.ToString() + " Files have been renamed" + Environment.NewLine;
-            textBoxErrors.Text = "No changes made to " + alreadyExist.ToString() + " Files";
+            if (alreadyExist != 0) textBoxErrors.Text += "No changes made to " + alreadyExist.ToString() + " Files";
             textBoxErrors.Text += Environment.NewLine + Environment.NewLine;
             textBoxErrors.Text += errors;
             panel.Visible = true;

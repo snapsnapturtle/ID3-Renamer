@@ -37,12 +37,11 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.labelAlpha = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
-            this.buttonExit = new System.Windows.Forms.Button();
-            this.labelErrorReporting = new System.Windows.Forms.Label();
-            this.textBoxErrors = new System.Windows.Forms.TextBox();
             this.buttonCTC = new System.Windows.Forms.Button();
+            this.textBoxErrors = new System.Windows.Forms.TextBox();
+            this.labelErrorReporting = new System.Windows.Forms.Label();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -128,17 +127,6 @@
             this.progressBar.TabIndex = 6;
             this.progressBar.Visible = false;
             // 
-            // labelAlpha
-            // 
-            this.labelAlpha.AutoSize = true;
-            this.labelAlpha.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.labelAlpha.ForeColor = System.Drawing.Color.LightGray;
-            this.labelAlpha.Location = new System.Drawing.Point(5, 181);
-            this.labelAlpha.Name = "labelAlpha";
-            this.labelAlpha.Size = new System.Drawing.Size(107, 37);
-            this.labelAlpha.TabIndex = 7;
-            this.labelAlpha.Text = "ALPHA";
-            // 
             // panel
             // 
             this.panel.Controls.Add(this.buttonCTC);
@@ -151,25 +139,15 @@
             this.panel.TabIndex = 8;
             this.panel.Visible = false;
             // 
-            // buttonExit
+            // buttonCTC
             // 
-            this.buttonExit.Location = new System.Drawing.Point(339, 178);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(64, 23);
-            this.buttonExit.TabIndex = 0;
-            this.buttonExit.Text = "Back";
-            this.buttonExit.UseVisualStyleBackColor = true;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // labelErrorReporting
-            // 
-            this.labelErrorReporting.AutoSize = true;
-            this.labelErrorReporting.Font = new System.Drawing.Font("Segoe UI", 12.75F);
-            this.labelErrorReporting.Location = new System.Drawing.Point(12, 9);
-            this.labelErrorReporting.Name = "labelErrorReporting";
-            this.labelErrorReporting.Size = new System.Drawing.Size(127, 23);
-            this.labelErrorReporting.TabIndex = 1;
-            this.labelErrorReporting.Text = "Error Reporting";
+            this.buttonCTC.Location = new System.Drawing.Point(222, 178);
+            this.buttonCTC.Name = "buttonCTC";
+            this.buttonCTC.Size = new System.Drawing.Size(111, 23);
+            this.buttonCTC.TabIndex = 3;
+            this.buttonCTC.Text = "Copy To Clipboard";
+            this.buttonCTC.UseVisualStyleBackColor = true;
+            this.buttonCTC.Click += new System.EventHandler(this.buttonCTC_Click);
             // 
             // textBoxErrors
             // 
@@ -183,15 +161,25 @@
             this.textBoxErrors.Size = new System.Drawing.Size(385, 136);
             this.textBoxErrors.TabIndex = 2;
             // 
-            // buttonCTC
+            // labelErrorReporting
             // 
-            this.buttonCTC.Location = new System.Drawing.Point(222, 178);
-            this.buttonCTC.Name = "buttonCTC";
-            this.buttonCTC.Size = new System.Drawing.Size(111, 23);
-            this.buttonCTC.TabIndex = 3;
-            this.buttonCTC.Text = "Copy To Clipboard";
-            this.buttonCTC.UseVisualStyleBackColor = true;
-            this.buttonCTC.Click += new System.EventHandler(this.buttonCTC_Click);
+            this.labelErrorReporting.AutoSize = true;
+            this.labelErrorReporting.Font = new System.Drawing.Font("Segoe UI", 12.75F);
+            this.labelErrorReporting.Location = new System.Drawing.Point(12, 9);
+            this.labelErrorReporting.Name = "labelErrorReporting";
+            this.labelErrorReporting.Size = new System.Drawing.Size(127, 23);
+            this.labelErrorReporting.TabIndex = 1;
+            this.labelErrorReporting.Text = "Error Reporting";
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.Location = new System.Drawing.Point(339, 178);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(64, 23);
+            this.buttonExit.TabIndex = 0;
+            this.buttonExit.Text = "Back";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // MainWindow
             // 
@@ -207,7 +195,6 @@
             this.Controls.Add(this.listDirectories);
             this.Controls.Add(this.buttonFindFiles);
             this.Controls.Add(this.buttonBrowseParentDirectory);
-            this.Controls.Add(this.labelAlpha);
             this.Name = "MainWindow";
             this.Text = "ID3 Renamer";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -231,7 +218,6 @@
         private System.Windows.Forms.Button buttonStart;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label labelAlpha;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonCTC;
