@@ -13,15 +13,17 @@ using System.Text.RegularExpressions;
 
 namespace ID3Renamer
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         string errors;
 
         int fileCount;
+        int currentNumber;
         int alreadyExist = 0;
+
         delegate string SomeDelegate(FileInfo fileInfo, string directory);
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -89,12 +91,14 @@ namespace ID3Renamer
                     if (File.Exists(directory + newFileName + ".mp3"))
                     {
                         alreadyExist++;
+                        currentNumber++;
                         return fileInfo.Name;
                     }
 
                     else
                     {
                         File.Move(fileInfo.FullName, directory + newFileName + ".mp3");
+                        currentNumber++;
                         return fileInfo.Name;
                     }
                     
@@ -102,15 +106,18 @@ namespace ID3Renamer
 
                 catch (Exception ex)
                 {
+                    currentNumber++;
                     errors += ex.Message + Environment.NewLine + fileInfo.FullName + Environment.NewLine + Environment.NewLine;
                 }
             }
-
+            
             return "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            progressBar.Visible = true;
+            progressBar.Maximum = listDirectories.Items.Count;
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -124,7 +131,12 @@ namespace ID3Renamer
                 SomeDelegate sd = changeMp3;
                 IAsyncResult asyncRes = sd.BeginInvoke(info, directory, null, null);
                 string result = sd.EndInvoke(asyncRes);
-                labelStatus.Text = result;
+                backgroundWorker.ReportProgress(1);
+
+                string output = result;
+                try { output = result.Substring(0, 40); } catch(Exception ex) {}
+
+                labelStatus.Text = output;
             }
         }
 
@@ -132,6 +144,14 @@ namespace ID3Renamer
         {
             MessageBox.Show(errors + Environment.NewLine + alreadyExist.ToString());
             labelStatus.Text = "Ready";
+            progressBar.Visible = false;
+            progressBar.Maximum = 100;
+            listDirectories.Items.Clear();
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = currentNumber;
         }
     }
 }
