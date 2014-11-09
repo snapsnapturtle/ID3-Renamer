@@ -44,6 +44,9 @@ namespace ID3Renamer
 
             if (Directory.Exists(directory))
             {
+                fileCount = 0;
+                listDirectories.Items.Clear();
+
                 string[] files = Directory.GetFiles(directory, "*.mp3", SearchOption.AllDirectories);
                 foreach (string file in files)
                 {
@@ -196,6 +199,7 @@ namespace ID3Renamer
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            processDirectory(textBoxParentDirectory.Text);
             panel.Visible = false;
         }
 

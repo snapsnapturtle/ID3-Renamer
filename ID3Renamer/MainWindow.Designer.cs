@@ -59,7 +59,6 @@
             // listDirectories
             // 
             this.listDirectories.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listDirectories.FormattingEnabled = true;
             this.listDirectories.Location = new System.Drawing.Point(12, 38);
             this.listDirectories.Name = "listDirectories";
             this.listDirectories.ScrollAlwaysVisible = true;
@@ -135,7 +134,7 @@
             this.panel.Controls.Add(this.buttonExit);
             this.panel.Location = new System.Drawing.Point(0, 3);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(415, 212);
+            this.panel.Size = new System.Drawing.Size(415, 214);
             this.panel.TabIndex = 8;
             this.panel.Visible = false;
             // 
@@ -167,9 +166,9 @@
             this.labelErrorReporting.Font = new System.Drawing.Font("Segoe UI", 12.75F);
             this.labelErrorReporting.Location = new System.Drawing.Point(12, 9);
             this.labelErrorReporting.Name = "labelErrorReporting";
-            this.labelErrorReporting.Size = new System.Drawing.Size(127, 23);
+            this.labelErrorReporting.Size = new System.Drawing.Size(61, 23);
             this.labelErrorReporting.TabIndex = 1;
-            this.labelErrorReporting.Text = "Error Reporting";
+            this.labelErrorReporting.Text = "Report";
             // 
             // buttonExit
             // 
