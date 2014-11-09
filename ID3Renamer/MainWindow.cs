@@ -208,5 +208,10 @@ namespace ID3Renamer
             Clipboard.Clear();
             Clipboard.SetText(textBoxErrors.Text);
         }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            backgroundWorker.CancelAsync();
+        }
     }
 }
