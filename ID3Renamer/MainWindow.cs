@@ -20,6 +20,7 @@ namespace ID3Renamer
         int fileCount;
         int currentNumber;
         int alreadyExist = 0;
+        int changed = 0;
 
         delegate string SomeDelegate(FileInfo fileInfo, string directory);
 
@@ -83,10 +84,14 @@ namespace ID3Renamer
 
                 try
                 {
+                    MessageBox.Show(newFileName);
+
                     string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
                     Regex r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
 
                     newFileName = r.Replace(newFileName, "");
+
+                    MessageBox.Show(newFileName);
 
                     if (File.Exists(directory + newFileName + ".mp3"))
                     {
@@ -99,6 +104,7 @@ namespace ID3Renamer
                     {
                         File.Move(fileInfo.FullName, directory + newFileName + ".mp3");
                         currentNumber++;
+                        changed++;
                         return fileInfo.Name;
                     }
                     
@@ -118,6 +124,12 @@ namespace ID3Renamer
         {
             progressBar.Visible = true;
             progressBar.Maximum = listDirectories.Items.Count;
+            lockCrontrols();
+            panel.Visible = true;
+            buttonCTC.Visible = false;
+            buttonExit.Visible = false;
+            labelErrorReporting.Text = "Working...";
+            textBoxErrors.Text = "Renaming Files";
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -142,16 +154,55 @@ namespace ID3Renamer
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show(errors + Environment.NewLine + alreadyExist.ToString());
+            buttonCTC.Visible = true;
+            buttonExit.Visible = true;
+            labelErrorReporting.Text = "Error Reporting";
+            textBoxErrors.Text = changed.ToString() + " Files have been renamed" + Environment.NewLine;
+            textBoxErrors.Text = "No changes made to " + alreadyExist.ToString() + " Files";
+            textBoxErrors.Text += Environment.NewLine + Environment.NewLine;
+            textBoxErrors.Text += errors;
+            panel.Visible = true;
             labelStatus.Text = "Ready";
             progressBar.Visible = false;
             progressBar.Maximum = 100;
             listDirectories.Items.Clear();
+            unlockCrontrols();
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = currentNumber;
+        }
+
+        private void lockCrontrols()
+        {
+            textBoxParentDirectory.Enabled = false;
+            buttonStart.Enabled = false;
+            listDirectories.Enabled = false;
+            buttonFindFiles.Enabled = false;
+            buttonStart.Enabled = false;
+            buttonBrowseParentDirectory.Enabled = false;
+        }
+
+        private void unlockCrontrols()
+        {
+            textBoxParentDirectory.Enabled = true;
+            buttonStart.Enabled = true;
+            listDirectories.Enabled = true;
+            buttonFindFiles.Enabled = true;
+            buttonStart.Enabled = true;
+            buttonBrowseParentDirectory.Enabled = false;
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            panel.Visible = false;
+        }
+
+        private void buttonCTC_Click(object sender, EventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(textBoxErrors.Text);
         }
     }
 }
