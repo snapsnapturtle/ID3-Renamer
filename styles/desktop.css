@@ -1,0 +1,89 @@
+@import url("fonts/fonts.css");
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    width: 70%;
+    color: #2a2a2a;
+    margin: 0 auto;
+    
+}
+
+h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+img {
+    margin-right: 5px;
+}
+
+a {
+    font-size: small;
+    text-decoration: none;
+    color: #1887d1;
+}
+
+#header {
+    background-color: #68217a;
+    height: 30px;
+    font-family: 'Segoe UI Light', sans-serif;
+    color: #fff;
+}
+
+#header a {
+    color: #eee;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 27px;
+    padding-left: 10px;
+}
+
+#header a:hover {
+    color: #fff;
+}
+
+#content {
+    background-color: #fff;
+    padding: 40px;
+    color: #333;
+}
+
+#files{
+    font-size: small;
+    padding-top: 10px;
+}
+
+.title {
+    font-family: 'Segoe UI Light', sans-serif;
+    color: #68217a;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.download {
+    background-color: #dedede;
+    padding: 10px;
+    color: black;
+    max-height: 39px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.download:hover {
+     background-color: #eeeeee;
+ }
+
+a img {
+    position: relative; top:14px;}
