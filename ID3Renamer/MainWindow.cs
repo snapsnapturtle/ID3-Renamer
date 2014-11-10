@@ -207,6 +207,7 @@ namespace ID3Renamer
         {
             Clipboard.Clear();
             Clipboard.SetText(textBoxErrors.Text);
+            labelStatus.Text = "Report copied...";
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)

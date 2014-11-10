@@ -68,10 +68,6 @@
     <TargetZone>Internet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Desktop\taglib-sharp-2.1.0.0-windows\Libraries\policy.2.0.taglib-sharp.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -82,9 +78,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="taglib-sharp">
-      <HintPath>..\..\..\..\Desktop\taglib-sharp-2.1.0.0-windows\Libraries\taglib-sharp.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\taglib-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ID3Renamer_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
@@ -139,6 +136,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\taglib-sharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
